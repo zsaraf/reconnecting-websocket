@@ -106,7 +106,7 @@
         return;
     }
 
-    function ReconnectingWebSocket(url, protocols, options, extraHeaders = {}) {
+    function ReconnectingWebSocket(url, protocols, options, extraHeaders) {
 
         // Default settings
         var settings = {
@@ -165,7 +165,6 @@
          * Read only.
          */
         this.protocol = null;
-        this.extraHeaders = extraHeaders
 
         // Private state variables
 
@@ -207,7 +206,7 @@
         };
 
         this.open = function (reconnectAttempt) {
-            ws = new WebSocket(self.url, protocols || [], self.extraHeaders);
+            ws = new WebSocket(self.url, protocols || [], self.extraHeaders || {});
             ws.binaryType = this.binaryType;
 
             if (reconnectAttempt) {
